@@ -76,7 +76,7 @@ namespace httpcsharp.services.data
                 s => s.Index(GENRE_INDEX)
                     .Size(1)
                     .Query(q => q.Bool(b => b.Should(bs => bs.Term(genre => genre.Id, genreId))))
-            );
+                );
 
             return response.Documents.SingleOrDefault();
         }
@@ -89,7 +89,13 @@ namespace httpcsharp.services.data
 
         public Genre UpdateGenre(Genre genre)
         {
-            throw new System.NotImplementedException();
+            _elasticClient.Update(
+                DocumentPath<Genre>.Id(genre.Id),
+                update => update.Index(GENRE_INDEX)
+                    .DocAsUpsert()
+                    .Doc(genre)
+            );
+            return genre;
         }
 
         public void DeleteGenre(string genreId)

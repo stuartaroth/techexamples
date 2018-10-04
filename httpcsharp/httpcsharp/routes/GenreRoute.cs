@@ -25,6 +25,8 @@ namespace httpcsharp.routes
             {
                 case HttpMethod.GET:
                     return GetHandler(context);
+                case HttpMethod.PUT:
+                    return PutHandler(context);
                 default:
                     return context;
             }
@@ -50,6 +52,29 @@ namespace httpcsharp.routes
                     var genres = _dataService.GetGenres();
                     json = _jsonService.Write(genres);
                 }
+            }
+            catch (Exception e)
+            {
+                context.Response.StatusCode = HttpStatusCode.InternalServerError;
+                json = _jsonService.Write(new ErrorMessage(e.Message));
+            }
+            
+            context.Response.SendResponse(Encoding.ASCII.GetBytes(json));
+            return context;
+        }
+        
+        private IHttpContext PutHandler(IHttpContext context)
+        {
+            context.Response.ContentType = ContentType.JSON;
+
+            String json;
+
+            try
+            {
+                String body = context.Request.Payload;
+                var genre = _jsonService.Read<Genre>(body);
+                var updatedGenre = _dataService.UpdateGenre(genre);
+                json = _jsonService.Write(updatedGenre);
             }
             catch (Exception e)
             {

@@ -19,5 +19,10 @@ namespace httpcsharp.services.json
         {
             return JsonConvert.SerializeObject(value, _serializerSettings);
         }
+
+        public T Read<T>(string json)
+        {
+            return JsonConvert.DeserializeObject<T>(json, _serializerSettings);
+        }
     }
 }
