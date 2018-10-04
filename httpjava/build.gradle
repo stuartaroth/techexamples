@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group 'org.stuartaroth'
+mainClassName = 'org.stuartaroth.httpjava.App'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // json
+    compile 'com.google.code.gson:gson:2.8.2'
+
+    // http server framework
+    compile 'com.sparkjava:spark-core:2.7.2'
+
+    // mysql
+    compile 'org.mariadb.jdbc:mariadb-java-client:2.2.1'
+
+    // logger
+    compile 'org.slf4j:slf4j-api:1.7.25'
+    compile 'org.slf4j:slf4j-log4j12:1.7.25'
+
+    // redis
+    compile 'redis.clients:jedis:2.9.0'
+}

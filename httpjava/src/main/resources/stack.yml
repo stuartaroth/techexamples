@@ -1,0 +1,16 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+  techs-mysql:
+    image: mysql:5.7.23
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: techpw
+  techs-redis:
+    image: redis:4.0.11
+    ports:
+      - "6379:6379"

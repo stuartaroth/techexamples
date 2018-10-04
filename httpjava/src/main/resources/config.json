@@ -1,0 +1,15 @@
+{
+  "applicationType": "HTTP",
+  "dataServiceType": "IN_MEMORY",
+  "mysqlConfig": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "technologies",
+    "username": "root",
+    "password": "techpw"
+  },
+  "redisConfig": {
+    "host": "localhost",
+    "port": 6379
+  }
+}
