@@ -6,7 +6,7 @@ namespace httpcsharp.services.id
     {
         public string GenerateId()
         {
-            return Guid.NewGuid().ToString();
+            return Guid.NewGuid().ToString().Replace("-", "");
         }
 
         public string GenerateId(string prefix)

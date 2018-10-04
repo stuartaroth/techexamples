@@ -14,7 +14,10 @@ namespace httpcsharp
         static void Main(string[] args)
         {
             IIdService idService = new UniqueIdService();
-            IDataService dataService = new InMemoryDataService(idService);
+            IDataService inMemoryDataService = new InMemoryDataService(idService);
+            inMemoryDataService.SetupData(null);
+            
+            IDataService dataService = new ElasticDataService(inMemoryDataService);
             dataService.SetupData(null);
 
             IJsonService jsonService = new NewtonJsonService();
